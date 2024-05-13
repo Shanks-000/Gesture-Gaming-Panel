@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GESTURE GAMING CONTROL</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+    <script src="{{ url_for('static', filename='script.js') }}" defer></script>
+
+</head>
+
+<body>
+
+    <header>
+        <nav class="navbar">
+            <a href="#" class="logo">
+                <img src="/static/logo.png" alt="logo">
+                <h2>GestureControlGame</h2>
+            </a>
+            <ul class="links">
+                <li><a href="#">HOME</a></li>
+                <li><a href="{{ url_for('about_us') }}">ABOUT US</a></li>
+                <li><a href="{{ url_for('contact') }}">MEET CREATORS</a></li>
+                <li><a href="{{ url_for('connect') }}">CONNECT WITH US</a></li>
+            </ul>
+            <button class="login-btn">LOG IN</button>
+        </nav>
+    </header>
+
+
+    <!--Popup Form-->
+    <div class="blur-bg-overlay"> </div>
+    <div class="form-popup show-signup">
+       <span class="close-btn material-symbols-rounded">Close</span>
+        <div class="form-box login">
+            <div class="form-details">
+                <h2>Welcome User</h2>
+                <p>Please Log in using your personal information to stay connected with us.</p>   
+            </div>
+            <div class="form-content">
+                <h2>LOGIN</h2>
+                <form action="#">
+                    <div class="input-field">
+                        <input type="text">
+                        <label>Email</label>
+                    </div>
+                    <div class="input-field">
+                        <input type="password">
+                        <label>Password</label>
+                    </div>
+                    <a href="#" class="forgot-pass">Forgot Password?</a>
+                    <button type="submit">Log In</button>
+                </form>
+                <div class="bottom-link">
+                    Don't have an account?
+                    <a href="#" id="signup-link">Signup</a>
+
+                </div>
+            </div>
+        </div>
+        <div class="form-box signup">
+            <div class="form-details">
+                <h2>Create Account</h2>
+                <p>To become a part of our community, please sign up using your personal Information.</p>   
+            </div>
+            <div class="form-content">
+                <h2>SIGNUP</h2>
+                <form action="#">
+                    <div class="input-field">
+                        <input type="text">
+                        <label>Enter Your Email</label>
+                    </div>
+                    <div class="input-field">
+                        <input type="password">
+                        <label>Create Password</label>
+                    </div>
+                    <div class="policy-text">
+                        <input type="checkbox" id="policy">
+                        <label for="policy">
+                           I agree the
+                           <a href="#">Terms & Conditions</a>
+                        </label>
+                    </div>
+                    <button type="submit">Sign Up</button>
+                </form>
+                <div class="bottom-link">
+                  Already have an account?
+                    <a href="#" id="login-link">Login</a>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+  
+       <!-- Add this script at the end of your HTML body -->
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+    // Get the form elements
+    const signupForm = document.querySelector('.form-box.signup form');
+    const loginForm = document.querySelector('.form-box.login form'); // Added this line
+    const loginLink = document.getElementById('login-link');
+
+    if (loginForm) {
+        loginForm.addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            // Your login validation logic
+            const email = document.querySelector('.form-box.login input[type="text"]').value; // Ensure correct selector
+            const password = document.querySelector('.form-box.login input[type="password"]').value;
+
+            if (email && password) {
+                alert('Login successful! Redirecting to the Game Page');
+                setTimeout(function () {
+                    window.location.href="{{ url_for('test') }}";
+                }, 2000);
+            } else {
+                alert('Invalid email or password. Please try again.');
+            }
+        });
+    }
+
+    if (signupForm) {
+        signupForm.addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            const signupEmail = document.querySelector('.form-box.signup input[type="text"]').value;
+            const signupPassword = document.querySelector('.form-b+ox.signup input[type="password"]').value;
+
+            if (signupEmail && signupPassword) {
+                alert('Signup successful! Redirecting to the Home Page');
+                setTimeout(function () {
+                    window.location.href = 'index.html';
+                }, 2000);
+            } else {
+                alert('Signup failed. Please try again.');
+            }
+        });
+    }
+
+    if (loginLink) {
+        loginLink.addEventListener('click', function (event) {
+            event.preventDefault();
+            document.querySelector('.form-box').classList.remove('show-signup'); // Ensure correct selector
+        });
+    }
+});
+
+</script>
+</body>
+</html>
